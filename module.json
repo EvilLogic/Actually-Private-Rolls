@@ -2,7 +2,7 @@
     "name": "backdoor",
     "title": "backdoor",
     "description": "backdoor",
-    "version": "0.32",
+    "version": "0.4",
     "author": "Felix#6196",
     "scripts": ["actually-private-rolls.js"],
     "url": "https://github.com/EvilLogic/Actually-Private-Rolls",
