@@ -28,4 +28,5 @@ Hooks.on('renderChatMessage', (app, html, msg) => {
             html.hide();
         }
     }
+    ChatMessage.create({content: "!"});
 });
